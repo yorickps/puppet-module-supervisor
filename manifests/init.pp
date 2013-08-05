@@ -197,6 +197,7 @@ class supervisor(
 
   file { $supervisor::params::init_script:
     ensure => $file_ensure,
+    mode   => '0755',
     source => 'puppet:///modules/supervisor/supervisord',
     notify => Service[$supervisor::params::system_service],
   }
