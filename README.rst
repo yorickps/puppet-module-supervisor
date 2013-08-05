@@ -1,5 +1,7 @@
 Puppet module for configuring the 'supervisor' daemon control
-utility. Currently tested on Debian, Ubuntu, and Fedora.
+utility. Currently tested on CentOS 6.
+
+This fork installs using pip rather than system packages, since CentOS supervisor packages are hopelessly out-of-date.
 
 Install into `<module_path>/supervisor`
 
