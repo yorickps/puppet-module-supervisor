@@ -205,6 +205,6 @@ class supervisor(
     ensure     => $service_ensure_real,
     enable     => $service_enable,
     hasrestart => true,
-    require    => [ File[$supervisor::params::conf_file], File[$supervisor:params::system_service] ]
+    require    => [ File[$supervisor::params::conf_file], File[$supervisor::params::system_service] ]
   }
 }
