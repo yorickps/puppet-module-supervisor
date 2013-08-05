@@ -18,4 +18,6 @@ class supervisor::params {
       fail("Unsupported platform: ${::osfamily}")
     }
   }
+
+  $init_script = "/etc/init.d/$system_service"
 }
