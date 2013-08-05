@@ -195,7 +195,7 @@ class supervisor(
     require => Package[$supervisor::params::package],
   }
 
-  file { $supervisor::params::system_service:
+  file { "/etc/init.d/${supervisor::params::system_service}":
     ensure => $file_ensure,
     source => 'puppet:///modules/supervisor/supervisord',
     notify => Service[$supervisor::params::system_service],
