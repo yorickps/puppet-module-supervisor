@@ -195,10 +195,17 @@ class supervisor(
     require => Package[$supervisor::params::package],
   }
 
+  file { $supervisor:params::system_service:
+    ensure => $file_ensure,
+    source => 'puppet:///modules/supervisor/supervisord',
+    notify => $supervisor::params::system_service],
+  }
+
   service { $supervisor::params::system_service:
     ensure     => $service_ensure_real,
     enable     => $service_enable,
     hasrestart => true,
-    require    => File[$supervisor::params::conf_file],
+    require    => [ File[$supervisor::params::conf_file], File[$supervisor:params::system_service] ]
+
   }
 }
