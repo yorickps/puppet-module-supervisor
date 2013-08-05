@@ -198,7 +198,7 @@ class supervisor(
   file { $supervisor::params::system_service:
     ensure => $file_ensure,
     source => 'puppet:///modules/supervisor/supervisord',
-    notify => $supervisor::params::system_service,
+    notify => Service[$supervisor::params::system_service],
   }
 
   service { $supervisor::params::system_service:
