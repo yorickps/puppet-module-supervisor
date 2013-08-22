@@ -165,6 +165,12 @@ class supervisor(
     }
   }
 
+  package { $supervisor::params::plugins:
+    ensure   => $package_ensure,
+    provider => 'pip',
+    require  => Package[$supervisor::params::package]
+  }
+
   file { $conf_dir:
     ensure  => $dir_ensure,
     purge   => true,

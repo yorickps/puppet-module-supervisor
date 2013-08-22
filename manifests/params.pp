@@ -19,5 +19,7 @@ class supervisor::params {
     }
   }
 
+  $plugins = ['superlance']
+  
   $init_script = "/etc/init.d/$system_service"
 }
