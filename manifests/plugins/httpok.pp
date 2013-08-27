@@ -14,7 +14,7 @@ define supervisor::plugins::httpok (
     $process_name = $title
   }
 
-  file { "${supervisor::params::conf_dir}/${title}.conf":
+  file { "${supervisor::params::conf_dir}/httpok-${title}.conf":
     ensure  => $file_ensure,
     content => template('supervisor/plugins/httpok.ini.erb'),
     require => File[$supervisor::params::conf_dir],
