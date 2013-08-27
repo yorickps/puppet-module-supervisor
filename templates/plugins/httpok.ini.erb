@@ -1,5 +1,3 @@
-<% if @httpok %>
 [eventlistener:<%= name -%>-httpok]
 command=/usr/bin/httpok -p <%= name -%> <% if @httpok_code -%> -c <%= httpok_code -%> <%= httpok_url -%> <% end %>
 events=TICK_60
-<% end -%>
