@@ -1,5 +1,5 @@
 <% @ports.each do |p| %>
-<% process_name = @process_prefix + @ports.length > 1 ? p.to_s : "" %>
+<% process_name = @process_prefix + (@ports.length > 1 ? p.to_s : "") %>
 [eventlistener:httpok-<%= @name -%>_<%= p %>]
 command=/usr/bin/httpok -p <%= process_name -%> -c <%= @code -%> <%= @url -%>:<%= @port %>
 events=TICK_60
