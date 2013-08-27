@@ -42,8 +42,3 @@ environment=<%= environment %>
 umask=<%= umask %>
 <% end -%>
 
-<% if @httpok %>
-[eventlistener:<%= name -%>-httpok]
-command=httpok -p <%= name -%> <% if @httpok_code -%> -c <%= httpok_code -%> <%= httpok_url -%> <% end %>
-events=TICK_60
-<% end -%>
