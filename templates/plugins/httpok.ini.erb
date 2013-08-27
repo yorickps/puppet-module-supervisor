@@ -4,7 +4,7 @@
   <% @process_name = @process_name + p.to_s %>
 <% end %>
 
-[eventlistener:httpok-<%= @name -%>_<%= p =>]
+[eventlistener:httpok-<%= @name -%>_<%= p %>]
 command=/usr/bin/httpok -p <%= @process_name -%> -c <%= @code -%> <%= @url -%>:<%= @port -%>
 events=TICK_60
 
