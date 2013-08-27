@@ -1,10 +1,20 @@
 define supervisor::plugins::httpok (
-  $process,
-  $httpok_url,
-  $httpok_code = 200,
+  $url,
+  $port,
+  $code     = 200,
+  $numprocs = 1,
+
 ) {
 
-  file { "${supervisor::params::conf_dir}/httpok-${title}.conf":
+  $ports = range ($port, $port + $numprocs - 1)
+
+  if $numprocs > 1 {
+    $process_name = "${title}:${title}_"
+  } else {
+    $process_name = $title
+  }
+
+  file { "${supervisor::params::conf_dir}/${title}.conf":
     ensure  => $file_ensure,
     content => template('supervisor/plugins/httpok.ini.erb'),
     require => File[$supervisor::params::conf_dir],
