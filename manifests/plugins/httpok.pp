@@ -7,7 +7,7 @@ define supervisor::plugins::httpok (
   file { "${supervisor::params::conf_dir}/httpok-${title}.conf":
     ensure  => $file_ensure,
     content => template('supervisor/plugins/httpok.ini.erb'),
-    require => File[$conf_dir],
+    require => File[$supervisor::params::conf_dir],
     notify  => Service[$supervisor::params::system_service],
   }
 }
