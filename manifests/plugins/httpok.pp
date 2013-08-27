@@ -9,9 +9,9 @@ define supervisor::plugins::httpok (
   $ports = range ($port, $port + $numprocs - 1)
 
   if $numprocs > 1 {
-    $process_name = "${title}:${title}_"
+    $process_prefix = "${title}:${title}_"
   } else {
-    $process_name = $title
+    $process_prefix = $title
   }
 
   file { "${supervisor::params::conf_dir}/httpok-${title}.conf":
