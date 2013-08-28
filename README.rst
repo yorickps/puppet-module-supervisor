@@ -12,24 +12,24 @@ Example usage:
 
   include supervisor
 
-  supervisor::service {
-    'scribe':
-      ensure      => present,
-      enable      => true,
-      command     => '/usr/bin/scribed -c /etc/scribe/scribe.conf',
-      environment => 'HADOOP_HOME=/usr/lib/hadoop,LD_LIBRARY_PATH=/usr/lib/jvm/java-6-sun/jre/lib/amd64/server',
-      user        => 'scribe',
-      group       => 'scribe',
-      require     => [ Package['scribe'], User['scribe'] ];
+  supervisor::service { 'http-app':
+    ensure          => present,
+    enable          => true,
+    user            => 'http-user',
+    directory       => '/var/www/http-app',
+    numprocs        => 4,
+    numprocs_start  => 8000,
+    command         => "/var/www/http-app/app.py --host 127.0.0.1 --port %(process_num)s",
+    redirect_stderr => true,
+    stdout_logfile  => "/var/log/supervivor/http-app-%(process_num)s.log",
+    stderr_logfile  => "/var/log/supervisor/http-app-%(process_num)s.error.log"
   }
 
-To use default debian paths:
-
-.. code-block:: puppet
-
-  class { 'supervisor':
-    conf_dir => '/etc/supervisor/conf.d',
-    conf_ext => '.conf',
+  supervisor::plugins::httpok { 'http-app':
+    url      => 'http://127.0.0.1',
+    port     => 8000,
+    code     => '200',
+    numprocs => 4
   }
 
 Running tests:
