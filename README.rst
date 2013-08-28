@@ -1,7 +1,8 @@
 Puppet module for configuring the 'supervisor' daemon control
 utility. Currently tested on CentOS 6.
 
-This fork installs using pip rather than system packages, since CentOS supervisor packages are hopelessly out-of-date.
+This fork installs using pip rather than system packages, since CentOS supervisor packages are hopelessly out-of-date. I've also added 
+some support for supervisor extensions (specifically superlance/httpok, but can easily be extended).
 
 Install into `<module_path>/supervisor`
 

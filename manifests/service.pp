@@ -35,10 +35,7 @@ define supervisor::service (
   $stderr_logfile_keep      = 10,
   $environment              = undef,
   $umask                    = undef,
-  # plugins
-  $httpok                   = false,
-  $httpok_url               = undef,
-  $httpok_code              = 200
+ 
 ) {
   include supervisor
 
