@@ -1,6 +1,7 @@
 define supervisor::plugins::httpok (
-  $url,
+  $address,
   $port,
+  $url,
   $code     = 200,
   $numprocs = 1,
 
