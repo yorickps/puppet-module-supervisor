@@ -123,7 +123,7 @@ class supervisor(
   $conf_dir                 = $supervisor::params::conf_dir,
   $conf_ext                 = $supervisor::params::conf_ext,
   $include_files            = [],
-  
+
 ) inherits supervisor::params {
 
   include supervisor::update
