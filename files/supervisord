@@ -19,10 +19,11 @@
 . /etc/rc.d/init.d/functions
 
 RETVAL=0
+SUPERVISORD=/usr/local/bin/supervisord
 
 start() {
   echo -n $"Starting supervisord: "
-  daemon supervisord -c /etc/supervisord.conf
+  daemon $SUPERVISORD -c /etc/supervisord.conf
   RETVAL=$?
   echo
   [ $RETVAL -eq 0 ] && touch /var/lock/subsys/supervisord
@@ -30,7 +31,7 @@ start() {
 
 stop() {
   echo -n $"Stopping supervisord: "
-  killproc supervisord
+  killproc $SUPERVISORD
   echo
   [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/supervisord
 }
