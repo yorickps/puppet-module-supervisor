@@ -92,7 +92,7 @@ define supervisor::service (
   service { "supervisor::${name}":
     ensure   => $service_ensure,
     provider => base,
-    restart  => "/usr/local/bin/supervisorctl restart ${process_name} | awk '/^${name}[: ]/{print \$2}' | grep -Pzo '^stopped\nstarted$'",
+    restart  => "/usr/local/bin/supervisorctl restart ${process_name} | awk '/^${name}[: ]/{print \$2}' | grep -Pzo '^started$'",
     start    => "/usr/local/bin/supervisorctl start ${process_name} | grep 'started'",
     status   => "/usr/local/bin/supervisorctl status | awk '/^${name}[: ]/{print \$2}' | grep '^RUNNING$'",
     stop     => "/usr/local/bin/supervisorctl stop ${process_name} | awk '/^${name}[: ]/{print \$2}' | grep '^stopped$'",
