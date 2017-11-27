@@ -122,6 +122,7 @@ class supervisor(
   $recurse_config_dir       = false,
   $conf_dir                 = $supervisor::params::conf_dir,
   $conf_ext                 = $supervisor::params::conf_ext,
+  $bin_dir                  = $supervisor::params::bin_dir,
   $include_files            = [],
 
 ) inherits supervisor::params {

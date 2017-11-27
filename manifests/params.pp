@@ -1,6 +1,7 @@
 class supervisor::params {
   case $::osfamily {
     'debian': {
+      $bin_dir        = '/bin'
       $conf_file      = '/etc/supervisor/supervisord.conf'
       $conf_dir       = '/etc/supervisor'
       $conf_ext       = '.conf'
@@ -8,6 +9,7 @@ class supervisor::params {
       $package        = 'supervisor'
     }
     'redhat': {
+      $bin_dir        = '/bin'
       $conf_file      = '/etc/supervisord.conf'
       $conf_dir       = '/etc/supervisord.d'
       $conf_ext       = '.conf'
@@ -20,6 +22,6 @@ class supervisor::params {
   }
 
   $plugins = ['superlance']
-  
+
   $init_script = "/etc/init.d/$system_service"
 }
