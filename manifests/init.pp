@@ -204,10 +204,10 @@ class supervisor(
   }
 
   file { $supervisor::params::init_script:
-    ensure => $file_ensure,
-    mode   => '0755',
-    source => 'puppet:///modules/supervisor/supervisord',
-    notify => Service[$supervisor::params::system_service],
+    ensure  => $file_ensure,
+    mode    => '0755',
+    content => template('supervisor/supervisord.erb'),
+    notify  => Service[$supervisor::params::system_service],
   }
 
   service { $supervisor::params::system_service:
