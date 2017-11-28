@@ -19,7 +19,7 @@
 . /etc/rc.d/init.d/functions
 
 RETVAL=0
-SUPERVISORD=<%= @supervisor::bin_dir -%>/supervisord
+SUPERVISORD=<%= @bin_dir -%>/supervisord
 
 start() {
   echo -n $"Starting supervisord: "
