@@ -91,10 +91,10 @@ define supervisor::service (
   service { "supervisor::${name}":
     ensure   => $service_ensure,
     provider => base,
-    restart  => "${supervisor::bin_dir}/supervisorctl restart ${process_name} | awk '/^${name}[: ]/{print \$2}' | grep -Pzo '^started$'",
+    restart  => "${supervisor::bin_dir}/supervisorctl restart ${process_name} | awk '/^(.*?:)?${name}/{print \$2}' | grep -Pzo '^started$'",
     start    => "${supervisor::bin_dir}/supervisorctl start ${process_name} | grep 'started'",
-    status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print $2}' | grep '^RUNNING$'",
-    stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name} | awk '/^${name}[: ]/{print \$2}' | grep '^stopped$'",
+    status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print \$2}' | grep '^RUNNING$'",
+    stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
     require  => [Class['supervisor::update'], File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]],
   }
 }
