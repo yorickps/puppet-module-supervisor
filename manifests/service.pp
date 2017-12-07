@@ -34,7 +34,8 @@ define supervisor::service (
   $stderr_logfile_maxsize   = '250MB',
   $stderr_logfile_keep      = 10,
   $environment              = undef,
-  $umask                    = undef
+  $umask                    = undef,
+  $process_group            = undef
 ) {
   include supervisor
 
@@ -66,9 +67,15 @@ define supervisor::service (
   }
 
   if $numprocs > 1 {
-    $process_name = "${name}:*"
+    $process_name = $process_group ? {
+      undef   => "${name}_%(process_num)02d"
+      default => "${process_group}:${name}_%(process_num)02d"
+    }
   } else {
-    $process_name = $name
+    $process_name = $process_group ? {
+      undef   => $name,
+      default => "${process_group}:${name}"
+    }
   }
 
   file { "/var/log/supervisor/${name}":
