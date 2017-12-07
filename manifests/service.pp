@@ -66,18 +66,6 @@ define supervisor::service (
     }
   }
 
-  if $numprocs > 1 {
-    $process_name = $process_group ? {
-      undef   => "${name}:*",
-      default => "${process_group}:${name}:*"
-    }
-  } else {
-    $process_name = $process_group ? {
-      undef   => $name,
-      default => "${process_group}:${name}"
-    }
-  }
-
   file { "/var/log/supervisor/${name}":
     ensure  => $dir_ensure,
     owner   => $user,
@@ -95,13 +83,23 @@ define supervisor::service (
     notify  => Class['supervisor::update'],
   }
 
+  $process_name = $process_group ? {
+    undef   => $name,
+    default => "${process_group}:${name}"
+  }
+
+  $allprocs = $numprocs > 1 {
+    false => '',
+    true  => ':*'
+  }
+
   service { "supervisor::${name}":
     ensure   => $service_ensure,
     provider => base,
-    restart  => "${supervisor::bin_dir}/supervisorctl restart ${process_name} | awk '/^(.*?:)?${name}/{print \$2}' | grep -Pzo '^started$'",
+    restart  => "${supervisor::bin_dir}/supervisorctl restart ${process_name}${allprocs} | awk '/^(.*?:)?${name}/{print \$2}' | grep -Pzo '^started$'",
     start    => "${supervisor::bin_dir}/supervisorctl start ${process_name} | grep 'started'",
     status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print \$2}' | grep '^RUNNING$'",
-    stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
+    stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name}${allprocs} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
     require  => [Class['supervisor::update'], File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]],
   }
 }
