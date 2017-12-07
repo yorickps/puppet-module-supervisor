@@ -68,8 +68,8 @@ define supervisor::service (
 
   if $numprocs > 1 {
     $process_name = $process_group ? {
-      undef   => "${name}_%(process_num)02d",
-      default => "${process_group}:${name}_%(process_num)02d"
+      undef   => "${name}:*",
+      default => "${process_group}:${name}:*"
     }
   } else {
     $process_name = $process_group ? {
