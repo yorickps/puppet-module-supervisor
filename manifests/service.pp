@@ -88,7 +88,7 @@ define supervisor::service (
     default => "${process_group}:${name}"
   }
 
-  $allprocs = $numprocs > 1 ? {
+  $allprocs = ($numprocs > 1) ? {
     false => '',
     true  => ':*'
   }
