@@ -17,9 +17,13 @@ The README template below provides a starting point with details about what info
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+Puppet module for configuring the 'supervisor' daemon control
+utility. Currently tested on CentOS 6.
 
-This should be a fairly short description helps the user decide if your module is what they want.
+This fork installs using pip rather than system packages, since CentOS supervisor packages are hopelessly out-of-date. I've also added 
+some support for supervisor extensions (specifically superlance/httpok, but can easily be extended).
+
+Install into `<module_path>/supervisor`
 
 ## Setup
 
@@ -46,6 +50,30 @@ The very basic steps needed for a user to get the module up and running. This ca
 ## Usage
 
 Include usage examples for common use cases in the **Usage** section. Show your users how to use your module to solve problems, and be sure to include code examples. Include three to five examples of the most important or common tasks a user can accomplish with your module. Show users how to accomplish more complex tasks that involve different types, classes, and functions working in tandem.
+
+```puppet
+  include supervisor
+
+  supervisor::service { 'http-app':
+    ensure          => present,
+    enable          => true,
+    user            => 'http-user',
+    directory       => '/var/www/http-app',
+    numprocs        => 4,
+    numprocs_start  => 8000,
+    command         => "/var/www/http-app/app.py --host 127.0.0.1 --port %(process_num)s",
+    redirect_stderr => true,
+    stdout_logfile  => "/var/log/supervivor/http-app-%(process_num)s.log",
+    stderr_logfile  => "/var/log/supervisor/http-app-%(process_num)s.error.log"
+  }
+
+  supervisor::plugins::httpok { 'http-app':
+    url      => 'http://127.0.0.1',
+    port     => 8000,
+    code     => '200',
+    numprocs => 4
+  }
+```
 
 ## Reference
 
