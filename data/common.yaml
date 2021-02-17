@@ -5,8 +5,10 @@ supervisor::childlogdir: '/var/log/supervisor'
 supervisor::conf_dir: ~
 supervisor::conf_ext: '.conf'
 supervisor::conf_file: ~
+supervisor::file_ensure: present
+supervisor::dir_ensure: present
 supervisor::enable_inet_server: false
-supervisor::ensure: 'present'
+supervisor::ensure: present
 supervisor::identifier: undef
 supervisor::include_files: []
 supervisor::inet_server_pass: undef
@@ -21,11 +23,19 @@ supervisor::minfds: 1024
 supervisor::minprocs: 200
 supervisor::nocleanup: false
 supervisor::package: 'supervisor'
+supervisor::package_ensure: 'present'
+supervisor::package_manage: true
+supervisor::package_install_options: []
+supervisor::package::provider: pip
 supervisor::plugins:
   - 'superlance'
 supervisor::recurse_config_dir: false
 supervisor::service_enable: true
+supervisor::service_enable: true
 supervisor::service_ensure: 'running'
+supervisor::service_hasrestart: true
+supervisor::service_hasstatus: true
+supervisor::service_manage: true
 supervisor::supervisor_environment: undef
 supervisor::system_service: ~
 supervisor::umask: '022'
