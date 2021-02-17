@@ -1,0 +1,3 @@
+---
+supervisor::conf_dir:  '/etc/supervisor'
+supervisor::system_service: 'supervisor'
