@@ -54,7 +54,7 @@ Include usage examples for common use cases in the **Usage** section. Show your 
 ```puppet
   include supervisor
 
-  supervisor::service { 'http-app':
+  supervisor::services { 'http-app':
     ensure          => present,
     enable          => true,
     user            => 'http-user',
