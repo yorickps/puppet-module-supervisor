@@ -124,12 +124,12 @@ class supervisor(
   String $conf_ext,
   Stdlib::Absolutepath $bin_dir,
   Array $include_files,
-  String $supervisor::file_ensure,
-  String $supervisor::dir_ensure,
-  Boolean $supervisor::service_manage,
-  Boolean $supervisor::service_enable,
-  Boolean $supervisor::service_hasstatus,
-  Boolean $supervisor::service_hasrestart,
+  String $file_ensure,
+  String $dir_ensure,
+  Boolean $service_manage,
+  Boolean $service_enable,
+  Boolean $service_hasstatus,
+  Boolean $service_hasrestart,
 ) {
   contain supervisor::install
   contain supervisor::config
