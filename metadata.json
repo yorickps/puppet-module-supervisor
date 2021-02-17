@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "author": "Paul Lathrop <paul@tertiusfamily.net>",
   "summary": "Puppet module to install and configure supervisor",
-  "license": "Apache-2.0",
+  "license": "BSD",
   "source": "https://github.com/plathrop/puppet-module-supervisor",
   "project_page": "https://github.com/plathrop/puppet-module-supervisor",
   "issues_url": "https://github.com/plathrop/puppet-module-supervisor",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 4.0.0 < 6.0.0"
+      "version_requirement": ">= 4.0.0 < 8.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -21,21 +21,9 @@
       ]
     },
     {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "8"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
       ]
     },
     {
@@ -49,19 +37,12 @@
       "operatingsystemrelease": [
         "18.04"
       ]
-    },
-    {
-      "operatingsystem": "windows",
-      "operatingsystemrelease": [
-        "2019",
-        "10"
-      ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 7.0.0"
+      "version_requirement": ">= 5.5.10 < 7.0.0"
     }
   ],
   "description": "Supervisor module.",
