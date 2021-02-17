@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Paul Lathrop <paul@tertiusfamily.net>",
   "summary": "Puppet module to install and configure supervisor",
-  "license": "BSD",
+  "license": "BSD-2-Clause",
   "source": "https://github.com/plathrop/puppet-module-supervisor",
   "project_page": "https://github.com/plathrop/puppet-module-supervisor",
   "issues_url": "https://github.com/plathrop/puppet-module-supervisor",
