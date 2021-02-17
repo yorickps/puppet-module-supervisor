@@ -76,10 +76,10 @@ define supervisor::service (
   }
 
   file { "${supervisor::conf_dir}/${name}${supervisor::conf_ext}":
-    ensure  => $config_ensure,
-    content => template('supervisor/service.ini.erb'),
-    require => File["/var/log/supervisor/${name}"],
-    notify  => Class['supervisor::update'],
+    ensure   => $config_ensure,
+    template => epp('supervisor/service.ini.epp'),
+    require  => File["/var/log/supervisor/${name}"],
+    notify   => Class['supervisor::update'],
   }
 
   $process_name = $process_group ? {
