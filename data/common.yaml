@@ -31,7 +31,6 @@ supervisor::plugins:
   - 'superlance'
 supervisor::recurse_config_dir: false
 supervisor::service_enable: true
-supervisor::service_enable: true
 supervisor::service_ensure: 'running'
 supervisor::service_hasrestart: true
 supervisor::service_hasstatus: true
