@@ -4,9 +4,7 @@ define supervisor::plugins::httpok (
   $url,
   $code     = 200,
   $numprocs = 1,
-
 ) {
-
   $ports = range ($port, $port + $numprocs - 1)
 
   if $numprocs > 1 {
@@ -16,7 +14,7 @@ define supervisor::plugins::httpok (
   }
 
   file { "${supervisor::conf_dir}/httpok-${title}.conf":
-    ensure  => $file_ensure,
+    ensure  => $supervisor::file_ensure,
     content => template('supervisor/plugins/httpok.ini.erb'),
     require => File[$supervisor::conf_dir],
     notify  => Service[$supervisor::system_service],
