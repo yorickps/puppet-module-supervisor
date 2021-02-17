@@ -127,7 +127,7 @@ class supervisor(
   String $supervisor::file_ensure,
   String $supervisor::dir_ensure,
   Boolean $supervisor::service_manage,
-  Boolean $supervisor::service_enable
+  Boolean $supervisor::service_enable,
   Boolean $supervisor::service_hasstatus,
   Boolean $supervisor::service_hasrestart,
 ) {
