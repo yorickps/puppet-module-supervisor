@@ -10,7 +10,7 @@
 #    group           => 'org_group',
 #  }
 #
-define supervisor::service (
+define supervisor::services (
   $command,
   $ensure                   = present,
   $enable                   = true,
@@ -100,7 +100,7 @@ define supervisor::service (
     status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print \$2}' | grep '^RUNNING$'",
     stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name}${allprocs} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
     require  => [
-      Class['supervisor::update'], 
+      Class['supervisor::update'],
       File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]
       ],
   }

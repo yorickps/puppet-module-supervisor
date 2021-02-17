@@ -10,7 +10,7 @@ class supervisor::service {
       enable     => $supervisor::service_enable,
       hasstatus  => $supervisor::service_hasstatus,
       hasrestart => $supervisor::service_hasrestart,
-      require    => [ 
+      require    => [
       File[$supervisor::conf_file],
       File[$supervisor::init_script],
       ],
