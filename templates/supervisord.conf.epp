@@ -4,7 +4,8 @@ file=/var/run/supervisor.sock   ; (the path to the socket file)
 <% if $supervisor::enable_inet_server { -%>
 [inet_http_server]
 port=<%= $supervisor::inet_server_port %>
-<% if $supervisor::inet_server_user && $supervisor::inet_server_pass { -%>
+<% if $supervisor::inet_server_user { -%>
+<% if $supervisor::inet_server_pass { -%>
 user=<%= $supervisor::inet_server_user %>
 pass=<%= $supervisor::inet_server_pass %>
 <% } -%>
@@ -41,7 +42,7 @@ serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
 [include]
 files = <%= $supervisor::conf_dir -%>/*<%= $supervisor::conf_ext -%>
 <% if $supervisor::include_files  { -%>
-<% $supervisor::include_files.each do |path| -%>
-<%= " #{path}" -%>
+<% $supervisor::include_files.each  -%>
+<%= " $path" -%>
 <% } -%>
 <% } -%>

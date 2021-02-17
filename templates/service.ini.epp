@@ -24,21 +24,20 @@ redirect_stderr=<%= $supervisor::redirect_stderr %>
 <% if $supervisor::stdout_logfile { -%>
 stdout_logfile=<%= $supervisor::stdout_logfile %>
 <% } else { -%>
-stdout_logfile=/var/log/supervisor/<%= $supervisor::name { -%>/<%= $supervisor::name { -%>.out
+stdout_logfile=/var/log/supervisor/<%= $supervisor::name -%>/<%= $supervisor::name -%>.out
 <% } -%>
 stdout_logfile_maxbytes=<%= $supervisor::stdout_logfile_maxsize %>
 stdout_logfile_backups=<%= $supervisor::stdout_logfile_keep %>
 <% if $supervisor::stderr_logfile { -%>
 stderr_logfile=<%= $supervisor::stderr_logfile %>
 <% } else { -%>
-stderr_logfile=/var/log/supervisor/<%= $supervisor::name { -%>/<%= $supervisor::name { -%>.err
+stderr_logfile=/var/log/supervisor/<%= $supervisor::name -%>/<%= $supervisor::name -%>.err
 <% } -%>
 stderr_logfile_maxbytes=<%= $supervisor::stderr_logfile_maxsize %>
 stderr_logfile_backups=<%= $supervisor::stderr_logfile_keep %>
 <% if $supervisor::environment { -%>
 environment=<%= $supervisor::environment %>
 <% } -%>
-<% if $supervisor::umask %>
+<% if $supervisor::umask { -%>
 umask=<%= $supervisor::umask %>
 <% } -%>
-
