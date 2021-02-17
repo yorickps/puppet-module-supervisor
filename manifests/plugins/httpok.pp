@@ -15,10 +15,10 @@ define supervisor::plugins::httpok (
     $process_prefix = $title
   }
 
-  file { "${supervisor::params::conf_dir}/httpok-${title}.conf":
+  file { "${supervisor::conf_dir}/httpok-${title}.conf":
     ensure  => $file_ensure,
     content => template('supervisor/plugins/httpok.ini.erb'),
-    require => File[$supervisor::params::conf_dir],
-    notify  => Service[$supervisor::params::system_service],
+    require => File[$supervisor::conf_dir],
+    notify  => Service[$supervisor::system_service],
   }
 }
