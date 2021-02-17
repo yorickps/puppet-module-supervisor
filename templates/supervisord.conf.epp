@@ -1,0 +1,47 @@
+[unix_http_server]
+file=/var/run/supervisor.sock   ; (the path to the socket file)
+
+<% if $supervisor::enable_inet_server { -%>
+[inet_http_server]
+port=<%= $supervisor::inet_server_port %>
+<% if $supervisor::inet_server_user && $supervisor::inet_server_pass { -%>
+user=<%= $supervisor::inet_server_user %>
+pass=<%= $supervisor::inet_server_pass %>
+<% } -%>
+<% } -%>
+
+[supervisord]
+logfile=<%= $supervisor::logfile %>                      ; (main log file;default $CWD/supervisord.log)
+logfile_maxbytes=<%= $supervisor::logfile_maxbytes %>    ; (max main logfile bytes b4 rotation;default 50MB)
+logfile_backups=<%= $supervisor::logfile_backups %>      ; (num of main logfile rotation backups;default 10)
+loglevel=<%= $supervisor::log_level %>                    ; (log level;default info; others: debug,warn,trace)
+pidfile=/var/run/supervisord.pid            ; (supervisord pidfile;default supervisord.pid)
+nodaemon=false                              ; (start in foreground if true;default false)
+minfds=<%= $supervisor::minfds %>                        ; (min. avail startup file descriptors;default 1024)
+minprocs=<%= $supervisor::minprocs %>                    ; (min. avail process descriptors;default 200)
+childlogdir=<%= $supervisor::childlogdir %>              ; ('AUTO' child log dir, default $TEMP)
+nocleanup=<%= $supervisor::nocleanup %>
+umask=<%= $supervisor::umask %>
+<% if $supervisor::user  { -%>
+user=<%= $supervisor::user %>
+<% } -%>
+<% if $supervisor::supervisor_environment  { -%>
+environment=<%= $supervisor::supervisor_environment %>
+<% } -%>
+<% if $supervisor::identifier  { -%>
+identifier=<%= $supervisor::identifier %>
+<% } -%>
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
+
+[include]
+files = <%= $supervisor::conf_dir -%>/*<%= $supervisor::conf_ext -%>
+<% if $supervisor::include_files  { -%>
+<% $supervisor::include_files.each do |path| -%>
+<%= " #{path}" -%>
+<% } -%>
+<% } -%>
