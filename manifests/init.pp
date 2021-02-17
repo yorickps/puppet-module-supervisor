@@ -102,7 +102,6 @@ class supervisor(
   String $package_ensure,
   Boolean $autoupgrade,
   Enum['running', 'stopped'] $service_ensure,
-  Boolean $service_enable,
   Boolean $enable_inet_server,
   String $inet_server_port,
   String $inet_server_user,
