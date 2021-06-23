@@ -22,6 +22,9 @@
 #     Start service at boot.
 #     Default: true
 #
+#   @param system_service
+#     Service name
+#
 #   @param enable_inet_server
 #     Enable inet_http_server.
 #     Default: false
@@ -121,6 +124,7 @@ class supervisor(
   Integer $minfds,
   Integer $minprocs,
   Stdlib::Absolutepath $childlogdir,
+  Stdlib::Absolutepath $conf_file,
   Boolean $nocleanup,
   String $user,
   String $umask,
@@ -137,6 +141,7 @@ class supervisor(
   Boolean $service_enable,
   Boolean $service_hasstatus,
   Boolean $service_hasrestart,
+  String $system_service,
 ) {
   contain supervisor::install
   contain supervisor::config
