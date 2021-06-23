@@ -118,7 +118,7 @@ class supervisor(
   String $umask,
   String $supervisor_environment,
   String $identifier,
-  Booleanm $recurse_config_dir,
+  Boolean $recurse_config_dir,
   Stdlib::Absolutepath $conf_dir,
   String $conf_ext,
   Stdlib::Absolutepath $bin_dir,
