@@ -34,10 +34,10 @@ class supervisor::config {
     require => Package[$supervisor::package],
   }
 
-  file { $supervisor::init_script:
-    ensure   => $supervisor::file_ensure,
-    mode     => '0755',
-    template => epp('supervisor/supervisor.service.epp'),
-    notify   => Service[$supervisor::system_service],
-  }
+#  file { $supervisor::init_script:
+#    ensure   => $supervisor::file_ensure,
+#    mode     => '0755',
+#    template => epp('supervisor/supervisor.service.epp'),
+#    notify   => Service[$supervisor::system_service],
+#  }
 }
