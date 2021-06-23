@@ -3,9 +3,9 @@
 # This module manages supervisor
 #
 # Parameters:
-#   @param pacckage
+#   @param package
 #     Supervisor package name - to install
-
+#
 #   @param ensure
 #     Ensure if present or absent.
 #     Default: present
