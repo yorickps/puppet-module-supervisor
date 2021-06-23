@@ -3,6 +3,9 @@
 # This module manages supervisor
 #
 # Parameters:
+#   @param pacckage
+#     Supervisor package name - to install
+
 #   @param ensure
 #     Ensure if present or absent.
 #     Default: present
@@ -89,6 +92,9 @@
 #     Remove unmanaged files from config directory.
 #     Default: false
 #
+#   @param plugins
+#     Array of plugins to install
+#
 # Actions:
 #   Installs supervisor.
 #
@@ -100,6 +106,8 @@
 #
 class supervisor(
   String $package_ensure,
+  String $package,
+  Array $plugins,
   Boolean $autoupgrade,
   Enum['running', 'stopped'] $service_ensure,
   Boolean $enable_inet_server,
