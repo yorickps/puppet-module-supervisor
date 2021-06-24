@@ -30,11 +30,11 @@ supervisor::package::provider: pip
 supervisor::plugins:
   - 'superlance'
 supervisor::recurse_config_dir: false
-supervisor::service_enable: true
-supervisor::service_ensure: 'running'
-supervisor::service_hasrestart: true
-supervisor::service_hasstatus: true
-supervisor::service_manage: true
+supervisor::system_service_enable: true
+supervisor::system_service_ensure: 'running'
+supervisor::system_service_hasrestart: true
+supervisor::system_service_hasstatus: true
+supervisor::system_service_manage: true
 supervisor::supervisor_environment: undef
 supervisor::system_service: ~
 supervisor::umask: '022'

@@ -137,19 +137,20 @@ class supervisor(
   Array $include_files,
   String $file_ensure,
   String $dir_ensure,
-  Boolean $service_manage,
-  Boolean $service_enable,
-  Boolean $service_hasstatus,
-  Boolean $service_hasrestart,
+  Boolean $system_service_manage,
+  Boolean $system_service_enable,
+  Boolean $system_service_hasstatus,
+  Boolean $system_service_hasrestart,
   String $system_service,
+  Hash $services,
 ) {
   contain supervisor::install
   contain supervisor::config
-  contain supervisor::service
+  contain supervisor::system_service
   contain supervisor::update
 
   Class['::supervisor::install']
   -> Class['::supervisor::config']
-  ~> Class['::supervisor::service']
+  ~> Class['::supervisor::system_service']
 
 }
