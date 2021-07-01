@@ -142,7 +142,7 @@ class supervisor(
   Boolean $system_service_hasstatus,
   Boolean $system_service_hasrestart,
   String $system_service,
-  Hash $services,
+  Hash $service,
 ) {
   contain supervisor::install
   contain supervisor::config

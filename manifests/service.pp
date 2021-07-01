@@ -10,7 +10,7 @@
 #    group           => 'org_group',
 #  }
 #
-define supervisor::services (
+define supervisor::service (
   $command,
   String $ensure                 = present,
   Boolean $enable                = true,
