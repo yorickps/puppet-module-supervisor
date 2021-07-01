@@ -38,7 +38,7 @@ define supervisor::service (
   $process_group                 = undef
 ){
   case $supervisor::ensure {
-    absent: {
+    'absent': {
       $autostart = false
       $dir_ensure = 'absent'
       $dir_recurse = true
@@ -46,7 +46,7 @@ define supervisor::service (
       $service_ensure = 'stopped'
       $config_ensure = 'absent'
     }
-    present: {
+    'present': {
       $autostart = true
       $dir_ensure = 'directory'
       $dir_recurse = false
