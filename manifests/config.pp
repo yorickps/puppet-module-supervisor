@@ -14,7 +14,7 @@ class supervisor::config {
   file { [
       '/var/log/supervisor',
       '/var/run/supervisor'
-  ]:
+  ]:,
       ensure  => $supervisor::dir_ensure,
       purge   => true,
       backup  => false,
