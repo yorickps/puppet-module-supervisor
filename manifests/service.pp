@@ -37,7 +37,7 @@ define supervisor::service (
   $umask                         = undef,
   $process_group                 = undef
 ){
-  case $supervisor::ensure {
+  case $ensure {
     'absent': {
       $autostart = false
       $dir_ensure = 'absent'
