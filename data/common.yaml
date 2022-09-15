@@ -5,8 +5,11 @@ supervisor::childlogdir: '/var/log/supervisor'
 supervisor::conf_dir: ~
 supervisor::conf_ext: '.conf'
 supervisor::conf_file: ~
+supervisor::config_ensure: ~
 supervisor::file_ensure: present
 supervisor::dir_ensure: present
+supervisor::dir_recurse: ~
+supervisor::dir_force: ~
 supervisor::enable_inet_server: false
 supervisor::ensure: present
 supervisor::identifier: undef
@@ -34,8 +37,46 @@ supervisor::system_service_enable: true
 supervisor::system_service_ensure: 'running'
 supervisor::system_service_hasrestart: true
 supervisor::system_service_hasstatus: true
-supervisor::system_service_manage: true
+supervisor::system_service_manage: true 
 supervisor::supervisor_environment: undef
 supervisor::system_service: ~
 supervisor::umask: '022'
 supervisor::user: undef
+
+
+# Warning: Unknown variable: 'supervisor::name'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 2, column: 14)          
+# Warning: Unknown variable: 'supervisor::command'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 3, column: 13)       
+# Warning: Unknown variable: 'supervisor::numprocs'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 4, column: 7)       
+# Warning: Unknown variable: 'supervisor::numprocs'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 7, column: 14)      
+# Warning: Unknown variable: 'supervisor::numprocs_start'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 8, column: 20)
+# Warning: Unknown variable: 'supervisor::priority'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 9, column: 14)    
+# Warning: Unknown variable: 'supervisor::autostart'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 10, column: 15)  
+# Warning: Unknown variable: 'supervisor::autorestart'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 11, column: 17)
+# Warning: Unknown variable: 'supervisor::startsecs'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 12, column: 15) 
+# Warning: Unknown variable: 'supervisor::retries'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 13, column: 18)        
+# Warning: Unknown variable: 'supervisor::exitcodes'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 14, column: 15)      
+# Warning: Unknown variable: 'supervisor::stopsignal'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 15, column: 16)     
+# Warning: Unknown variable: 'supervisor::stopwait'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 16, column: 18)       
+# Warning: Unknown variable: 'supervisor::directory'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 17, column: 7)              
+# Warning: Unknown variable: 'supervisor::user'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 20, column: 7)                   
+# Warning: Unknown variable: 'supervisor::redirect_stderr'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 23, column: 21)       
+# Warning: Unknown variable: 'supervisor::stdout_logfile'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 24, column: 7)         
+# Warning: Unknown variable: 'supervisor::name'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 27, column: 40)                  
+# Warning: Unknown variable: 'supervisor::name'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 27, column: 66)                  
+# Warning: Unknown variable: 'supervisor::stdout_logfile_maxsize'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 29, column: 29)
+# Warning: Unknown variable: 'supervisor::stdout_logfile_keep'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 30, column: 28)   
+# Warning: Unknown variable: 'supervisor::stderr_logfile'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 31, column: 7)         
+# Warning: Unknown variable: 'supervisor::name'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 34, column: 40)                  
+# Warning: Unknown variable: 'supervisor::name'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 34, column: 66)                                                                                                                                   
+# Warning: Unknown variable: 'supervisor::stderr_logfile_maxsize'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 36, column: 29)                                                                                                                 
+# Warning: Unknown variable: 'supervisor::stderr_logfile_keep'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 37, column: 28)                                                                                                                    
+# Warning: Unknown variable: 'supervisor::environment'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 38, column: 7)                                                                                                                             
+# Warning: Unknown variable: 'supervisor::umask'. (file: /var/lib/hpc-puppet/modules/supervisor/templates/service.ini.epp, line: 41, column: 7)                                                                                                                                   
+# Warning: Unknown variable: 'service_ensure'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 95, column: 17)                                                                                                                                          
+# Warning: Unknown variable: 'supervisor::bin_dir'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 97, column: 20) 
+# Warning: Unknown variable: 'supervisor::bin_dir'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 98, column: 20) 
+# Warning: Unknown variable: 'supervisor::bin_dir'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 99, column: 20) 
+# Warning: Unknown variable: 'supervisor::bin_dir'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 100, column: 20)
+# Warning: Unknown variable: 'supervisor::conf_dir'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 103, column: 15)
+# Warning: Unknown variable: 'supervisor::conf_ext'. (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 103, column: 46)
+# Error: no parameter named 'template' (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 77) on File[/genepattern] (file: /var/lib/hpc-puppet/modules/supervisor/manifests/service.pp, line: 77) on node tier2-p-genepattern-2.tier2.hpc.kuleuven.be
