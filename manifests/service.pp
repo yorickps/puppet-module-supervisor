@@ -17,26 +17,26 @@ define supervisor::service (
   Integer $numprocs              = 1,
   Integer $numprocs_start        = 0,
   Integer $priority              = 999,
-  $autorestart                   = 'unexpected',
+  String $autorestart            = 'unexpected',
   Integer $startsecs             = 1,
   Integer $retries               = 3,
-  $exitcodes                     = '0,2',
-  $stopsignal                    = 'TERM',
+  String $exitcodes              = '0,2',
+  String $stopsignal             = 'TERM',
   Integer $stopwait              = 10,
   String $user                   = 'root',
   String $group                  = 'root',
   Boolean $redirect_stderr       = false,
-  $directory                     = undef,
-  $stdout_logfile                = undef,
+  Stdlib::Absolutepath $directory = undef,
+  Stdlib::Absolutepath $stdout_logfile = undef,
   String $stdout_logfile_maxsize = '250MB',
   Integer $stdout_logfile_keep   = 10,
-  $stderr_logfile                = undef,
+  Stdlib::Absolutepath $stderr_logfile = undef,
   String $stderr_logfile_maxsize = '250MB',
   Integer $stderr_logfile_keep   = 10,
-  $environment                   = undef,
-  $umask                         = undef,
-  $process_group                 = undef
-){
+  String $environment            = undef,
+  String $umask                  = undef,
+  String $process_group          = undef
+) {
   case $ensure {
     'absent': {
       $autostart = false
@@ -101,6 +101,6 @@ define supervisor::service (
     require  => [
       Class['supervisor::update'],
       File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]
-      ],
+    ],
   }
 }
