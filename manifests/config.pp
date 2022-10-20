@@ -22,10 +22,9 @@ class supervisor::config {
   }
 
   file { $supervisor::conf_file:
-    ensure   => $supervisor::file_ensure,
-    template => epp('supervisor/supervisord.conf.epp'),
-    require  => File[$supervisor::conf_dir],
-    notify   => Service[$supervisor::system_service],
+    ensure  => $supervisor::file_ensure,
+    content => epp('supervisor/supervisord.conf.epp'),
+    require => File[$supervisor::conf_dir],
   }
 
   file { '/etc/logrotate.d/supervisor':

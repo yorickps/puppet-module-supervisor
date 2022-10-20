@@ -5,15 +5,11 @@
 #
 class supervisor::system_service {
   if $supervisor::system_service_manage == true {
-    service { $supervisor::system_service:
-      ensure     => $supervisor::system_service_ensure,
-      enable     => $supervisor::system_service_enable,
-      hasstatus  => $supervisor::system_service_hasstatus,
-      hasrestart => $supervisor::system_service_hasrestart,
-      require    => [
-      File[$supervisor::conf_file],
-      File[$supervisor::init_script],
-      ],
+    systemd::unit_file { "${supervisor::system_service}.service":
+      content => epp("${module_name}/supervisor.service.epp"),
+      enable  => $supervisor::system_service_enable,
+      active  => $supervisor::system_service_active,
+      require => File[$supervisor::conf_file],
     }
   }
 }

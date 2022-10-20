@@ -8,6 +8,6 @@ class supervisor::update {
     command     => "${supervisor::bin_dir}/supervisorctl update",
     logoutput   => on_failure,
     refreshonly => true,
-    require     => Service[$supervisor::system_service],
+    require     => Systemd::Unit_file["${supervisor::system_service}.service"],
   }
 }

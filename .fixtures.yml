@@ -1,3 +1,9 @@
 fixtures:
   symlinks:
     "supervisor": "#{source_dir}"
+  forge_modules:
+    stdlib:
+       repo: "puppetlabs/stdlib"
+    systemd:
+      repo: "puppet/systemd"
+

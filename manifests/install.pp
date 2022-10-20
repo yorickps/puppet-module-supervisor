@@ -8,14 +8,14 @@ class supervisor::install {
         ensure_packages($supervisor::package, {
             ensure          => $supervisor::package_ensure,
             install_options => $supervisor::package_install_options,
-            provider        => $supervisor::package::provider,
+            provider        => $supervisor::package_provider,
             })
     }
 
     ensure_packages($supervisor::plugins, {
         ensure          => $supervisor::package_ensure,
         install_options => $supervisor::package_install_options,
-        provider        => $supervisor::package::provider,
+        provider        => $supervisor::package_provider,
         require         => Package[$supervisor::package]
         })
 }
