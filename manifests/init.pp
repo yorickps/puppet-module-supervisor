@@ -152,5 +152,4 @@ class supervisor (
   Class['::supervisor::install']
   -> Class['::supervisor::config']
   ~> Class['::supervisor::system_service']
-
 }
