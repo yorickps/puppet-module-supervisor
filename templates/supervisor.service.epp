@@ -1,0 +1,14 @@
+[Unit]
+Description=supervisord - Supervisor process control system for UNIX
+Documentation=http://supervisord.org
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart=<%= $supervisor::bin_dir %><%= $supervisor::system_service %> -c <%= $supervisor::conf_file %>
+ExecReload=<%= $supervisor::bin_dir %>/supervisorctl reload
+ExecStop=<%= $supervisor::bin_dir %>/supervisorctl shutdown
+
+[Install]
+WantedBy=multi-user.target

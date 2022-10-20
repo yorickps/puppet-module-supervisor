@@ -1,0 +1,44 @@
+---
+supervisor::autoupgrade: false
+supervisor::bin_dir: '/bin/'
+supervisor::childlogdir: '/var/log/supervisor'
+supervisor::conf_dir: ~
+supervisor::conf_ext: '.conf'
+supervisor::conf_file: ~
+supervisor::config_ensure: ~
+supervisor::file_ensure: present
+supervisor::dir_ensure: present
+supervisor::dir_recurse: ~
+supervisor::dir_force: ~
+supervisor::enable_inet_server: false
+supervisor::ensure: present
+supervisor::identifier: undef
+supervisor::include_files: []
+supervisor::inet_server_pass: undef
+supervisor::inet_server_port: '*:9000'
+supervisor::inet_server_user: undef
+supervisor::init_script: "/etc/systemd/system/%{lookup($supervisor::system_service)}"
+supervisor::log_level: 'info'
+supervisor::logfile: '/var/log/supervisor/supervisord.log'
+supervisor::logfile_backups: 10
+supervisor::logfile_maxbytes: '500MB'
+supervisor::minfds: 1024
+supervisor::minprocs: 200
+supervisor::nocleanup: false
+supervisor::package: 'supervisor'
+supervisor::package_ensure: 'present'
+supervisor::package_manage: true
+supervisor::package_install_options: []
+supervisor::package::provider: pip
+supervisor::plugins:
+  - 'superlance'
+supervisor::recurse_config_dir: false
+supervisor::system_service_enable: true
+supervisor::system_service_ensure: 'running'
+supervisor::system_service_hasrestart: true
+supervisor::system_service_hasstatus: true
+supervisor::system_service_manage: true 
+supervisor::supervisor_environment: undef
+supervisor::system_service: ~
+supervisor::umask: '022'
+supervisor::user: undef

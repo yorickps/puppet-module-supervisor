@@ -1,0 +1,52 @@
+{
+  "name": "puppet-supervisor",
+  "version": "0.1.0",
+  "author": "Paul Lathrop <paul@tertiusfamily.net>",
+  "summary": "Puppet module to install and configure supervisor",
+  "license": "BSD-2-Clause",
+  "source": "https://github.com/plathrop/puppet-module-supervisor",
+  "project_page": "https://github.com/plathrop/puppet-module-supervisor",
+  "issues_url": "https://github.com/plathrop/puppet-module-supervisor",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.0.0 < 8.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "18.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.5.10 < 7.0.0"
+    }
+  ],
+  "description": "Supervisor module.",
+  "pdk-version": "2.5.0",
+  "template-url": "pdk-default#2.5.0",
+  "template-ref": "tags/2.5.0-0-g369d483"
+}

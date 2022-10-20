@@ -1,0 +1,4 @@
+---
+supervisor::conf_dir:  '/etc/supervisord.d'
+supervisor::conf_file:  '/etc/supervisord.conf'
+supervisor::system_service: 'supervisord'

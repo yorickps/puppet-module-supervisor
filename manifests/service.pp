@@ -12,35 +12,33 @@
 #
 define supervisor::service (
   $command,
-  $ensure                   = present,
-  $enable                   = true,
-  $numprocs                 = 1,
-  $numprocs_start           = 0,
-  $priority                 = 999,
-  $autorestart              = 'unexpected',
-  $startsecs                = 1,
-  $retries                  = 3,
-  $exitcodes                = '0,2',
-  $stopsignal               = 'TERM',
-  $stopwait                 = 10,
-  $user                     = 'root',
-  $group                    = 'root',
-  $redirect_stderr          = false,
-  $directory                = undef,
-  $stdout_logfile           = undef,
-  $stdout_logfile_maxsize   = '250MB',
-  $stdout_logfile_keep      = 10,
-  $stderr_logfile           = undef,
-  $stderr_logfile_maxsize   = '250MB',
-  $stderr_logfile_keep      = 10,
-  $environment              = undef,
-  $umask                    = undef,
-  $process_group            = undef
+  String $ensure                 = present,
+  Boolean $enable                = true,
+  Integer $numprocs              = 1,
+  Integer $numprocs_start        = 0,
+  Integer $priority              = 999,
+  String $autorestart            = 'unexpected',
+  Integer $startsecs             = 1,
+  Integer $retries               = 3,
+  String $exitcodes              = '0,2',
+  String $stopsignal             = 'TERM',
+  Integer $stopwait              = 10,
+  String $user                   = 'root',
+  String $group                  = 'root',
+  Boolean $redirect_stderr       = false,
+  Stdlib::Absolutepath $directory = undef,
+  Stdlib::Absolutepath $stdout_logfile = undef,
+  String $stdout_logfile_maxsize = '250MB',
+  Integer $stdout_logfile_keep   = 10,
+  Stdlib::Absolutepath $stderr_logfile = undef,
+  String $stderr_logfile_maxsize = '250MB',
+  Integer $stderr_logfile_keep   = 10,
+  String $environment            = undef,
+  String $umask                  = undef,
+  String $process_group          = undef
 ) {
-  include supervisor
-
   case $ensure {
-    absent: {
+    'absent': {
       $autostart = false
       $dir_ensure = 'absent'
       $dir_recurse = true
@@ -48,7 +46,7 @@ define supervisor::service (
       $service_ensure = 'stopped'
       $config_ensure = 'absent'
     }
-    present: {
+    'present': {
       $autostart = true
       $dir_ensure = 'directory'
       $dir_recurse = false
@@ -77,10 +75,10 @@ define supervisor::service (
   }
 
   file { "${supervisor::conf_dir}/${name}${supervisor::conf_ext}":
-    ensure  => $config_ensure,
-    content => template('supervisor/service.ini.erb'),
-    require => File["/var/log/supervisor/${name}"],
-    notify  => Class['supervisor::update'],
+    ensure   => $config_ensure,
+    template => epp('supervisor/service.ini.epp'),
+    require  => File["/var/log/supervisor/${name}"],
+    notify   => Class['supervisor::update'],
   }
 
   $process_name = $process_group ? {
@@ -100,6 +98,9 @@ define supervisor::service (
     start    => "${supervisor::bin_dir}/supervisorctl start ${process_name} | grep 'started'",
     status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print \$2}' | grep '^RUNNING$'",
     stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name}${allprocs} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
-    require  => [Class['supervisor::update'], File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]],
+    require  => [
+      Class['supervisor::update'],
+      File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]
+    ],
   }
 }
