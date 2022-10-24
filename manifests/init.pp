@@ -163,7 +163,7 @@ class supervisor (
   contain supervisor::system_service
   contain supervisor::update
 
-  Class['::supervisor::install']
-  -> Class['::supervisor::config']
-  ~> Class['::supervisor::system_service']
+  Class['supervisor::install']
+  -> Class['supervisor::config']
+  ~> Class['supervisor::system_service']
 }

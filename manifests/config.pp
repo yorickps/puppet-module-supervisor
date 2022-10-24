@@ -13,12 +13,12 @@ class supervisor::config {
 
   file { [
       '/var/log/supervisor',
-      '/var/run/supervisor'
-  ]:,
-      ensure  => $supervisor::dir_ensure,
-      purge   => true,
-      backup  => false,
-      require => Package[$supervisor::package],
+      '/var/run/supervisor',
+    ]:,
+    ensure  => $supervisor::dir_ensure,
+    purge   => true,
+    backup  => false,
+    require => Package[$supervisor::package],
   }
 
   file { $supervisor::conf_file:
