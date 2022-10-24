@@ -1,11 +1,21 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-it { is_expected.to compile.with_all_deps }
-describe 'Testing the dependancies between the classes' do
-  it { is_expected.to contain_class('ntp::install') }
-  it { is_expected.to contain_class('ntp::config') }
-  it { is_expected.to contain_class('ntp::service') }
-  it { is_expected.to contain_class('ntp::install').that_comes_before('Class[ntp::config]') }
-  it { is_expected.to contain_class('ntp::service').that_subscribes_to('Class[ntp::config]') }
-  it { is_expected.to contain_file('foo.rb').that_notifies('Service[ntp]') }
+describe 'supervisor' do
+  on_supported_os.each do |os, facts|
+    context "on #{os}" do
+      let(:facts) do
+        facts
+      end
+
+      context 'with default values' do
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('supervisor') }
+        it { is_expected.to contain_class('supervisor::install').that_comes_before('Class[supervisor::config]') }
+        it { is_expected.to contain_class('supervisor::config').that_notifies('Class[supervisor::system_service]') }
+        it { is_expected.to contain_class('supervisor::system_service') }
+      end
+    end
+  end
 end

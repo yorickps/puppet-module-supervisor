@@ -11,7 +11,7 @@
 #  }
 #
 define supervisor::service (
-  $command,
+  String $command,
   String $ensure                 = present,
   Boolean $enable                = true,
   Integer $numprocs              = 1,

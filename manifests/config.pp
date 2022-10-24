@@ -13,19 +13,18 @@ class supervisor::config {
 
   file { [
       '/var/log/supervisor',
-      '/var/run/supervisor'
-  ]:,
-      ensure  => $supervisor::dir_ensure,
-      purge   => true,
-      backup  => false,
-      require => Package[$supervisor::package],
+      '/var/run/supervisor',
+    ]:,
+    ensure  => $supervisor::dir_ensure,
+    purge   => true,
+    backup  => false,
+    require => Package[$supervisor::package],
   }
 
   file { $supervisor::conf_file:
-    ensure   => $supervisor::file_ensure,
-    template => epp('supervisor/supervisord.conf.epp'),
-    require  => File[$supervisor::conf_dir],
-    notify   => Service[$supervisor::system_service],
+    ensure  => $supervisor::file_ensure,
+    content => epp('supervisor/supervisord.conf.epp'),
+    require => File[$supervisor::conf_dir],
   }
 
   file { '/etc/logrotate.d/supervisor':

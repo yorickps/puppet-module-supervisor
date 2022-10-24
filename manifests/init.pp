@@ -6,6 +6,18 @@
 #   @param package
 #     Supervisor package name - to install
 #
+#   @param package_ensure
+#     Whether or not to install supervisor package
+#     Default: true
+#
+#   @param package_manage
+#     Manage Supervisor package or not
+#     Default: true
+#
+#   @param package_provider
+#     Provider to install package
+#     Default: pip
+#
 #   @param ensure
 #     Ensure if present or absent.
 #     Default: present
@@ -14,11 +26,11 @@
 #     Upgrade package automatically, if there is a newer version.
 #     Default: false
 #
-#   @param service_ensure
+#   @param system_service_ensure
 #     Ensure if service is running or stopped.
 #     Default: running
 #
-#   @param service_enable
+#   @param system_service_enable
 #     Start service at boot.
 #     Default: true
 #
@@ -122,6 +134,7 @@ class supervisor (
   String $inet_server_pass,
   String $inet_server_port,
   String $inet_server_user,
+  Stdlib::Absolutepath $init_script,
   String $log_level,
   Stdlib::Absolutepath $logfile,
   Integer $logfile_backups,
@@ -131,15 +144,16 @@ class supervisor (
   Boolean $nocleanup,
   String $package,
   String $package_ensure,
+  Array $package_install_options,
+  Boolean $package_manage,
+  String $package_provider,
   Array $plugins,
   Boolean $recurse_config_dir,
-  Hash $service,
-  Enum['running', 'stopped'] $service_ensure,
+  Optional[Hash] $service,
   String $supervisor_environment,
   String $system_service,
+  Boolean $system_service_active,
   Boolean $system_service_enable,
-  Boolean $system_service_hasrestart,
-  Boolean $system_service_hasstatus,
   Boolean $system_service_manage,
   String $umask,
   String $user
@@ -149,7 +163,7 @@ class supervisor (
   contain supervisor::system_service
   contain supervisor::update
 
-  Class['::supervisor::install']
-  -> Class['::supervisor::config']
-  ~> Class['::supervisor::system_service']
+  Class['supervisor::install']
+  -> Class['supervisor::config']
+  ~> Class['supervisor::system_service']
 }
