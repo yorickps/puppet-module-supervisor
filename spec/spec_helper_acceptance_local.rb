@@ -2,8 +2,6 @@
 
 include PuppetLitmus
 
-#UNSUPPORTED_PLATFORMS = ['windows', 'darwin'].freeze
-
 def inventory_hash
   @inventory_hash ||= inventory_hash_from_inventory_file
 end

@@ -2,7 +2,6 @@
 
 require 'spec_helper_acceptance'
 
-#describe 'supervisor class:', unless: UNSUPPORTED_PLATFORMS.include?(os[:family]) do
 describe 'supervisor class:' do
   context 'with supervisor' do
     let(:pp) { "class { 'supervisor': }" }
