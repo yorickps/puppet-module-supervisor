@@ -29,7 +29,7 @@ supervisor::package: 'supervisor'
 supervisor::package_ensure: 'present'
 supervisor::package_manage: true
 supervisor::package_install_options: []
-supervisor::package_provider: pip
+supervisor::package_provider: pip3
 supervisor::plugins:
   - 'superlance'
 supervisor::recurse_config_dir: false
