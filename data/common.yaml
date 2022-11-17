@@ -1,13 +1,13 @@
 ---
 supervisor::autoupgrade: false
-supervisor::bin_dir: '/bin/'
-supervisor::childlogdir: '/var/log/supervisor'
+supervisor::bin_dir: /bin/
+supervisor::childlogdir: /var/log/supervisor/
 supervisor::conf_dir:  ~
 supervisor::conf_ext: '.conf'
 supervisor::conf_file:  ~
 supervisor::config_ensure: ~
 supervisor::file_ensure: present
-supervisor::dir_ensure: present
+supervisor::dir_ensure: directory
 supervisor::dir_recurse: ~
 supervisor::dir_force: ~
 supervisor::enable_inet_server: false
@@ -19,7 +19,7 @@ supervisor::inet_server_port: '*:9000'
 supervisor::inet_server_user: undef
 supervisor::init_script: "/etc/systemd/system/%{lookup($supervisor::system_service)}"
 supervisor::log_level: 'info'
-supervisor::logfile: '/var/log/supervisor/supervisord.log'
+supervisor::logfile: /var/log/supervisor/supervisord.log
 supervisor::logfile_backups: 10
 supervisor::logfile_maxbytes: '500MB'
 supervisor::minfds: 1024

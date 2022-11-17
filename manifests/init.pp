@@ -1,6 +1,7 @@
 # Class: supervisor
 #
-# This module manages supervisor
+#  @summary
+#    This module manages supervisor
 #
 # Parameters:
 #   @param package
@@ -129,11 +130,11 @@ class supervisor (
   String $dir_ensure,
   Boolean $enable_inet_server,
   String $file_ensure,
-  String $identifier,
+  Optional[String] $identifier,
   Array $include_files,
-  String $inet_server_pass,
-  String $inet_server_port,
-  String $inet_server_user,
+  Optional[String] $inet_server_pass,
+  Optional[String] $inet_server_port,
+  Optional[String] $inet_server_user,
   Stdlib::Absolutepath $init_script,
   String $log_level,
   Stdlib::Absolutepath $logfile,
@@ -150,13 +151,13 @@ class supervisor (
   Array $plugins,
   Boolean $recurse_config_dir,
   Optional[Hash] $service,
-  String $supervisor_environment,
+  Optional[String] $supervisor_environment,
   String $system_service,
   Boolean $system_service_active,
   Boolean $system_service_enable,
   Boolean $system_service_manage,
   String $umask,
-  String $user
+  Optional[String] $user
 ) {
   contain supervisor::install
   contain supervisor::config
