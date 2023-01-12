@@ -12,7 +12,7 @@ supervisor::dir_recurse: ~
 supervisor::dir_force: ~
 supervisor::enable_inet_server: false
 supervisor::ensure: present
-supervisor::identifier: undef
+supervisor::identifier: supervisor
 supervisor::include_files: []
 supervisor::inet_server_pass: undef
 supervisor::inet_server_port: '*:9000'
@@ -39,5 +39,6 @@ supervisor::system_service_manage: true
 supervisor::supervisor_environment: undef
 supervisor::system_service: ~
 supervisor::umask: '022'
-supervisor::user: undef
+supervisor::user: supervisor
+supervisor::user_manage: false
 supervisor::service: {}

@@ -157,7 +157,8 @@ class supervisor (
   Boolean $system_service_enable,
   Boolean $system_service_manage,
   String $umask,
-  Optional[String] $user
+  Optional[String] $user,
+  Optional[Boolean] $user_manage
 ) {
   contain supervisor::install
   contain supervisor::config

@@ -26,16 +26,16 @@ define supervisor::service (
   String $user                   = 'root',
   String $group                  = 'root',
   Boolean $redirect_stderr       = false,
-  Stdlib::Absolutepath $directory = undef,
-  Stdlib::Absolutepath $stdout_logfile = undef,
-  String $stdout_logfile_maxsize = '250MB',
-  Integer $stdout_logfile_keep   = 10,
-  Stdlib::Absolutepath $stderr_logfile = undef,
-  String $stderr_logfile_maxsize = '250MB',
-  Integer $stderr_logfile_keep   = 10,
-  String $environment            = undef,
-  String $umask                  = undef,
-  String $process_group          = undef
+  Optional[Stdlib::Absolutepath] $directory = undef,
+  Stdlib::Absolutepath $stdout_logfile      = undef,
+  String $stdout_logfile_maxsize            = '250MB',
+  Integer $stdout_logfile_keep              = 10,
+  Stdlib::Absolutepath $stderr_logfile      = undef,
+  String $stderr_logfile_maxsize            = '250MB',
+  Integer $stderr_logfile_keep              = 10,
+  Optional[String] $environment             = undef,
+  Optional[String] $umask                   = undef,
+  Optional[String] $process_group           = undef
 ) {
   case $ensure {
     'absent': {
@@ -65,20 +65,19 @@ define supervisor::service (
   }
 
   file { "/var/log/supervisor/${name}":
-    ensure  => $dir_ensure,
+    ensure  => $ensure,
     owner   => $user,
     group   => $group,
     mode    => '0755',
     recurse => $dir_recurse,
     force   => $dir_force,
-    require => Class['supervisor'],
   }
 
   file { "${supervisor::conf_dir}/${name}${supervisor::conf_ext}":
-    ensure   => $config_ensure,
-    template => epp('supervisor/service.ini.epp'),
-    require  => File["/var/log/supervisor/${name}"],
-    notify   => Class['supervisor::update'],
+    ensure  => $config_ensure,
+    content => template('supervisor/service.ini.erb'),
+    require => File["/var/log/supervisor/${name}"],
+    notify  => Class['supervisor::update'],
   }
 
   $process_name = $process_group ? {
@@ -98,9 +97,6 @@ define supervisor::service (
     start    => "${supervisor::bin_dir}/supervisorctl start ${process_name} | grep 'started'",
     status   => "${supervisor::bin_dir}/supervisorctl status | awk '/^(.*?:)?${name}/{print \$2}' | grep '^RUNNING$'",
     stop     => "${supervisor::bin_dir}/supervisorctl stop ${process_name}${allprocs} | awk '/^(.*?:)?${name}/{print \$2}' | grep '^stopped$'",
-    require  => [
-      Class['supervisor::update'],
-      File["${supervisor::conf_dir}/${name}${supervisor::conf_ext}"]
-    ],
+    notify   => Class['supervisor::update'],
   }
 }

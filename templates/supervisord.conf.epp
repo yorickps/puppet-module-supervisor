@@ -1,16 +1,5 @@
 [unix_http_server]
-file=/var/run/supervisor.sock   ; (the path to the socket file)
-
-<% if $supervisor::enable_inet_server {-%>
-[inet_http_server]
-port=<%= $supervisor::inet_server_port %>
-<% if $supervisor::inet_server_user {-%>
-<% if $supervisor::inet_server_pass {-%>
-user=<%= $supervisor::inet_server_user %>
-pass=<%= $supervisor::inet_server_pass %>
-<% } -%>
-<% } -%>
-<% } -%>
+file=/var/run/supervisor.sock
 
 [supervisord]
 logfile=<%= $supervisor::logfile %>                   ; (main log file;default $CWD/supervisord.log)
@@ -42,6 +31,17 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]
 serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL for a unix socket
+
+<% if $supervisor::enable_inet_server {-%>
+[inet_http_server]
+port=<%= $supervisor::inet_server_port %>
+<% if $supervisor::inet_server_user {-%>
+<% if $supervisor::inet_server_pass {-%>
+user=<%= $supervisor::inet_server_user %>
+pass=<%= $supervisor::inet_server_pass %>
+<% } -%>
+<% } -%>
+<% } -%>
 
 [include]
 files = <%= $supervisor::conf_dir -%>/*<%= $supervisor::conf_ext -%>
