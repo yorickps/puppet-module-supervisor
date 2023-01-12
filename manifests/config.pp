@@ -4,6 +4,12 @@
 # @api private
 #
 class supervisor::config {
+  if $supervisor::user_manage == true {
+    user { $supervisor::user:
+      ensure => present,
+    }
+  }
+
   file { $supervisor::conf_dir:
     ensure  => $supervisor::dir_ensure,
     purge   => true,
@@ -33,10 +39,10 @@ class supervisor::config {
     require => Package[$supervisor::package],
   }
 
-#  file { $supervisor::init_script:
-#    ensure   => $supervisor::file_ensure,
-#    mode     => '0755',
-#    template => epp('supervisor/supervisor.service.epp'),
-#    notify   => Service[$supervisor::system_service],
-#  }
+  # create all the individual services defined
+  $supervisor::service.each |String $key, Hash $attrs| {
+    supervisor::service { $key:
+      * => $attrs,
+    }
+  }
 }

@@ -1,4 +1,3 @@
-# == Class supervisor::service
 #
 # This class is meant to be called from supervisor.
 # It ensure the service is running.
