@@ -2,6 +2,8 @@
 supervisor::autoupgrade: false
 supervisor::bin_dir: /bin/
 supervisor::childlogdir: /var/log/supervisor/
+supervisor::chown: false
+supervisor::chmod: false
 supervisor::conf_dir:  ~
 supervisor::conf_ext: '.conf'
 supervisor::conf_file:  ~

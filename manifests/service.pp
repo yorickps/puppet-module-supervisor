@@ -1,14 +1,59 @@
+#
+# @summary Service defintion
+#
+# @param command 
+#   Command to run
+# @param ensure 
+#   Ensure service. Default: present
+# @param enable 
+#   Enable service. Default: true
+# @param numprocs
+#   Number of procs to run. Default: 1
+# @param numprocs_start
+#   An integer offset that is used to compute the number at which process_num starts. Default: 0
+# @param priority
+#   The relative priority of the program in the start and shutdown ordering. Default: 999
+# @param autorestart
+#   Specifies if supervisord should automatically restart a process if it exits when it is in the RUNNING state. Default: unexpected
+# @param startsecs
+#   The total number of seconds which the program needs to stay running after a startup to consider the start successful
+# @param retries 
+#   The number of serial failure attempts that supervisord will allow when attempting to start the program before giving up and putting the process into an FATAL state.
+# @param exitcodes
+#   The list of "expected" exit codes for this program used with autorestart
+# @param stopsignal
+#   The signal used to kill the program when a stop is requested. Default: TERM
+# @param stopwait
+#   The number of seconds to wait for the OS to return a SIGCHLD to supervisord after the program has been sent a stopsigna. Default: 10
+# @param user
+#   Instruct supervisord to use this UNIX user account as the account which runs the program
+# @param group
+#
+# @param redirect_stderr
+#   If true, cause the process' stderr output to be sent back to supervisord on its stdout file descriptor 
+# @param directory
+# 
+# @param stdout_logfile
+#   Put process stdout output in this file
+# @param stdout_logfile_keep
+#   The number of stdout_logfile backups to keep around resulting from process stdout log file rotation. Default: 10
+# @param stdout_logfile_maxsize
+#   The maximum number of bytes that may be consumed by stdout_logfile. Default: 250MB
+# @param stderr_logfile
+#   Put process stderr output in this file. Default: false
+# @param stderr_logfile_keep
+#   The number of sterr_logfile backups to keep around resulting from process stdout log file rotation. Default: 10
+# @param stderr_logfile_maxsize
+#   The maximum number of bytes that may be consumed by stderr_logfile. Default: 250MB
+# @param environment
+#   A list of key/value pairs in the form KEY="val",KEY2="val2" that will be placed in the child process’ environment. 
+# @param umask
+#   An octal number (e.g. 002, 022) representing the umask of the process. Default: undef
+# @param process_group
+#   
+#
 # Actions:
 #   Set up a daemon to be run by supervisor
-#
-# Sample Usage:
-#  supervisor::service { 'organizational_worker':
-#    command         => '/usr/bin/php /var/www/vhosts/site/gearman/worker.php',
-#    numprocs        => 2,
-#    numprocs_start  => 1,
-#    user            => 'org_user',
-#    group           => 'org_group',
-#  }
 #
 define supervisor::service (
   String $command,

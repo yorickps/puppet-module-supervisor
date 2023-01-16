@@ -4,43 +4,52 @@
 #    This module manages supervisor
 #
 # Parameters:
-#   @param package
-#     Supervisor package name - to install
-#
-#   @param package_ensure
-#     Whether or not to install supervisor package
-#     Default: true
-#
-#   @param package_manage
-#     Manage Supervisor package or not
-#     Default: true
-#
-#   @param package_provider
-#     Provider to install package
-#     Default: pip
-#
-#   @param ensure
-#     Ensure if present or absent.
-#     Default: present
 #
 #   @param autoupgrade
 #     Upgrade package automatically, if there is a newer version.
 #     Default: false
 #
-#   @param system_service_ensure
-#     Ensure if service is running or stopped.
-#     Default: running
+#   @param bin_dir
+#     Supervisord binary dir location. Supervisord gets installed through python-pip.
 #
-#   @param system_service_enable
-#     Start service at boot.
-#     Default: true
+#   @param childlogdir
+#     The directory used for AUTO child log files.
+#     Default: /var/log/supervisor
 #
-#   @param system_service
-#     Service name
+#   @param chmod
+#     Boolean to manage chmod.
+#     Default: false
+#
+#   @param chown
+#     Boolean to manage chown.
+#     Default: false
+#
+#   @param conf_dir
+#     Config dir location
+#
+#   @param conf_ext
+#     Extension of the config file to load. Default: '.conf '
+#
+#   @param conf_file
+#     Location of the supervisord main configuration file. Default: ~ (see data/ per OS)
+#
+#   @param dir_ensure
+#     Manage the config directory. Default: directory
 #
 #   @param enable_inet_server
 #     Enable inet_http_server.
 #     Default: false
+#
+#   @param file_ensure
+#     Manage the config file presence. Default: present
+#
+#   @param identifier
+#     The identifier string for this supervisor process,
+#     used by the RPC interface.
+#     Default: undef
+#
+#   @param include_files
+#     Array to include additional config files. Default: []
 #
 #   @param inet_server_port
 #     inet_http_server ip:port to listen on.
@@ -56,6 +65,12 @@
 #     Password for the inet_http_server.
 #     Only used if inet_http_server is set to true and inet_server_user is set.
 #     Default: undef
+#
+#   @param init_script
+#     Location of the init script / systemd service file. Default: "/etc/systemd/system/%{lookup($supervisor::system_service)}"
+#
+#   @param log_level
+#     Log level. Default: info
 #
 #   @param logfile
 #     Main log file.
@@ -81,35 +96,67 @@
 #     supervisord will start successfully.
 #     Default: 200
 #
-#   @param childlogdir
-#     The directory used for AUTO child log files.
-#     Default: /var/log/supervisor
+#   @param nocleanup
+#     Prevent supervisord from clearing any existing AUTO child log files at startup time. Useful for debugging. Default: false
 #
-#   @param user
-#     If supervisord is run as the root user, switch users to this UNIX user
-#     account before doing any meaningful processing.
-#     Default: undef
+#   @param package
+#     Supervisor package name - to install
 #
-#   @param umask
-#     The umask of the supervisord process.
-#     Default: 022
+#   @param package_ensure
+#     Whether or not to install supervisor package
+#     Default: true
+#
+#   @param package_install_options
+#     Install options for the supervisor package. E.g. enable / disable certain package repositories. Default: []
+#
+#   @param package_manage
+#     Manage Supervisor package or not
+#     Default: true
+#
+#   @param package_provider
+#     Provider to install package
+#     Default: pip
+#
+#   @param plugins
+#     Array of plugins to install
+#
+#   @param recurse_config_dir
+#     Remove unmanaged files from config directory.
+#     Default: false
+#
+#   @param service
+#     Hash to define the supervisor services you would like to define / manage. Default: {}
 #
 #   @param supervisor_environment
 #     A list of key/value pairs in the form KEY=val,KEY2=val2 that will be
 #     placed in the supervisord process environment.
 #     Default: undef
 #
-#   @param identifier
-#     The identifier string for this supervisor process,
-#     used by the RPC interface.
+#   @param system_service
+#     Service name
+#
+#   @param system_service_active
+#     Ensure if service is active or not.
+#     Default: true
+#
+#   @param system_service_enable
+#     Start service at boot.
+#     Default: true
+#
+#   @param system_service_manage
+#     Whether or not to manage the supervisord system service. Default: true
+#
+#   @param umask
+#     The umask of the supervisord process.
+#     Default: 022
+#
+#   @param user
+#     If supervisord is run as the root user, switch users to this UNIX user
+#     account before doing any meaningful processing.
 #     Default: undef
 #
-#   @param recurse_config_dir
-#     Remove unmanaged files from config directory.
-#     Default: false
-#
-#   @param plugins
-#     Array of plugins to install
+#   @param user_manage
+#     Whether or not to install and manage the supervisor user. Default: false
 #
 # Actions:
 #   Installs supervisor.
@@ -124,6 +171,8 @@ class supervisor (
   Boolean $autoupgrade,
   Stdlib::Absolutepath $bin_dir,
   Stdlib::Absolutepath $childlogdir,
+  Optional[Boolean] $chmod,
+  Optional[Boolean] $chown,
   Stdlib::Absolutepath $conf_dir,
   String $conf_ext,
   Stdlib::Absolutepath $conf_file,

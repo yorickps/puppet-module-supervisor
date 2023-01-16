@@ -1,5 +1,14 @@
 [unix_http_server]
 file=/var/run/supervisor.sock
+<% if $supervisor::user  {-%>
+user=<%= $supervisor::user %>
+<% } -%>
+<% if $supervisor::chmod  {-%>
+chmod=0770 ; socket file mode (default 0700)
+<% } -%>
+<% if $supervisor::chown  {-%>
+chown=root:<%=$supervisor::user %> ; socket file uid:gid owner
+<% } -%>
 
 [supervisord]
 logfile=<%= $supervisor::logfile %>                   ; (main log file;default $CWD/supervisord.log)
@@ -14,10 +23,6 @@ childlogdir=<%= $supervisor::childlogdir %>           ; ('AUTO' child log dir, d
 nocleanup=<%= $supervisor::nocleanup %>
 umask=<%= $supervisor::umask %>
 
-<% if $supervisor::user  {-%>
-user=<%= $supervisor::user %>
-<% } -%>
-
 <% if $supervisor::supervisor_environment  {-%>
 environment=<%= $supervisor::supervisor_environment %>
 <% } -%>
@@ -31,6 +36,9 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]
 serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL for a unix socket
+<% if $supervisor::user  {-%>
+user=<%= $supervisor::user %>
+<% } -%>
 
 <% if $supervisor::enable_inet_server {-%>
 [inet_http_server]
