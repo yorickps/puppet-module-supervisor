@@ -1,9 +1,21 @@
+# @summary 
+#   This configures the httpok plugin
+# @param address
+#   Address of the web app to check
+# @param port 
+#   Port to check
+# @param url 
+#   Http url to check on the address
+# @param code 
+#   Http status code to check
+# @param numprocs 
+#   Supervisor will start as many instances of this program as named by numprocs
 define supervisor::plugins::httpok (
-  $address,
-  $port,
-  $url,
-  $code     = 200,
-  $numprocs = 1,
+  Stdlib::Httpurl $address,
+  Stdlib::Port $port,
+  String $url,
+  Integer $code     = 200,
+  Integer $numprocs = 1,
 ) {
   $ports = range ($port, $port + $numprocs - 1)
 
