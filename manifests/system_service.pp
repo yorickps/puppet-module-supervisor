@@ -1,3 +1,7 @@
+# @summary
+#   This class handles the service and related settings.
+#
+# @api private
 #
 # This class is meant to be called from supervisor.
 # It ensure the service is running.
