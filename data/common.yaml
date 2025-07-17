@@ -19,7 +19,7 @@ supervisor::include_files: []
 supervisor::inet_server_pass: undef
 supervisor::inet_server_port: '*:9000'
 supervisor::inet_server_user: undef
-supervisor::init_script: "/etc/systemd/system/%{lookup($supervisor::system_service)}"
+supervisor::init_script: "/etc/systemd/system/%{lookup('supervisor::system_service')}"
 supervisor::log_level: 'info'
 supervisor::logfile: /var/log/supervisor/supervisord.log
 supervisor::logfile_backups: 10
